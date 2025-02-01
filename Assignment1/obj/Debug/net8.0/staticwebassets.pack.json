@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/Assignment1.bundle.scp.css"
     },
     {
+      "Id": "/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/wwwroot/css/overrrides.css",
+      "PackagePath": "staticwebassets/css/overrrides.css"
+    },
+    {
       "Id": "/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

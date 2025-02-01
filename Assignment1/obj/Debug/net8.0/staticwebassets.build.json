@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xasqKffVBrfiytjfdjbO2LFnGYfDIvPkJXhLAgjHF4U=",
+  "Hash": "CPilIqtpkHor62mISOzZeXYPuZ7ognrOuwMiuc+fzDc=",
   "Source": "Assignment1",
   "BasePath": "_content/Assignment1",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/obj/Debug/net8.0/scopedcss/projectbundle/Assignment1.bundle.scp.css"
+    },
+    {
+      "Identity": "/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/wwwroot/css/overrrides.css",
+      "SourceId": "Assignment1",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/wwwroot/",
+      "BasePath": "_content/Assignment1",
+      "RelativePath": "css/overrrides.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/overrrides.css"
     },
     {
       "Identity": "/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/wwwroot/css/site.css",

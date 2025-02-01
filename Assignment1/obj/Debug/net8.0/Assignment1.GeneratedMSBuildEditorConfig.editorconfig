@@ -18,12 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Home/AddEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BZGRFbXBsb3llZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Home/Browse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Ccm93c2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Home/EmployeeList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9FbXBsb3llZUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/mousam/Desktop/mousam/fsdo/net/Assignment1/Assignment1/Views/Shared/Error.cshtml]

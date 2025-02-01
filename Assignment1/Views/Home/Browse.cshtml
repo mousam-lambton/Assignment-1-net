@@ -1,0 +1,28 @@
+@model Assignment1.Models.Employee
+
+@{
+    ViewData["Title"] = "Browse Employees";
+}
+
+<h1>Browse Employees</h1>
+
+<div>
+    <h4>Employee Details</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Employee ID:</dt>
+        <dd class="col-sm-10">@Model.EmployeeID</dd>
+        <dt class="col-sm-2">First Name:</dt>
+        <dd class="col-sm-10">@Model.FirstName</dd>
+        <dt class="col-sm-2">Last Name:</dt>
+        <dd class="col-sm-10">@Model.LastName</dd>
+        <dt class="col-sm-2">Job Title:</dt>
+        <dd class="col-sm-10">@Model.JobTitle</dd>
+        <dt class="col-sm-2">Salary:</dt>
+        <dd class="col-sm-10">@Model.Salary.ToString("C")</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Browse" asp-route-id="@(ViewBag.CurrentIndex - 1)" class="btn btn-secondary @(ViewBag.CurrentIndex == 0 ? "disabled" : "")">Previous</a>
+    <a asp-action="Browse" asp-route-id="@(ViewBag.CurrentIndex + 1)" class="btn btn-secondary @(ViewBag.CurrentIndex == ViewBag.TotalEmployees ? "disabled" : "")">Next</a>
+</div>

@@ -7,6 +7,9 @@
 bin/
 obj/
 
+Assignment1/bin/
+Assignment1/obj/
+
 packages/
 *.nupkg
 

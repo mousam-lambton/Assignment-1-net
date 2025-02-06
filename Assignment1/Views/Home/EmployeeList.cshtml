@@ -5,6 +5,10 @@
 }
 
 <h1>Employee List</h1>
+<div class="my-4">
+<a asp-action="AddEmployee" class="btn btn-outline-secondary"> ➕ Add New Employee</a>
+<a asp-action="Browse" class="btn btn-outline-secondary"> 🔍 Browse Employees</a>
+</div>
 
 <table class="table table-bordered">
     <thead>
@@ -14,6 +18,7 @@
         <th>Last Name</th>
         <th>Job Title</th>
         <th>Salary</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -25,10 +30,13 @@
             <td>@employee.LastName</td>
             <td>@employee.JobTitle</td>
             <td>@employee.Salary.ToString("C")</td>
+            <td>
+                
+                <a asp-action="Browse" asp-route-id="@(employee.EmployeeID-1)" class="text-decoration-underline">
+                    👁️ View
+                </a>
+            </td>
         </tr>
     }
     </tbody>
 </table>
-
-<a asp-action="AddEmployee" class="btn btn-primary">Add New Employee</a>
-<a asp-action="Browse" class="btn btn-secondary">Browse Employees</a>

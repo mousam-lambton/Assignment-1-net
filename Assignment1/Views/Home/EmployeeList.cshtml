@@ -35,6 +35,10 @@
                 <a asp-action="Browse" asp-route-id="@(employee.EmployeeID-1)" class="text-decoration-underline">
                     👁️ View
                 </a>
+                &nbsp; &nbsp;
+                <a asp-action="EditEmployee" asp-route-id="@(employee.EmployeeID)" class="text-decoration-underline">
+                    📝 Edit
+                </a>
             </td>
         </tr>
     }

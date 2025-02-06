@@ -49,10 +49,11 @@ namespace Assignment1.Controllers;
                 employees.Add(employee);
 
                 // Redirect to the index page
-                return RedirectToAction("Index");
+                return RedirectToAction("EmployeeList");
             }
             return View(employee);
         }
+       
 
         // Action to browse employees one by one
         public IActionResult Browse(int id = 0)
@@ -67,5 +68,43 @@ namespace Assignment1.Controllers;
             ViewBag.TotalEmployees = employees.Count - 1;
 
             return View(employee);
+        }
+        
+        // Edit employee GET action
+        [HttpGet]
+        public IActionResult EditEmployee(int id)
+        {
+            var employee = employees.FirstOrDefault(e => e.EmployeeID == id);
+            if (employee == null)
+            {
+                return NotFound(); // Return 404 if employee not found
+            }
+            return View(employee);
+        }
+
+        // Edit employee POST action
+        [HttpPost]
+        public IActionResult EditEmployee(Employee updatedEmployee)
+        {
+            if (ModelState.IsValid)
+            {
+                var employee = employees.FirstOrDefault(e => e.EmployeeID == updatedEmployee.EmployeeID);
+
+                if (employee == null)
+                {
+                    return NotFound(); // Return 404 if employee not found
+                }
+
+                // Update employee data
+                employee.FirstName = updatedEmployee.FirstName;
+                employee.LastName = updatedEmployee.LastName;
+                employee.JobTitle = updatedEmployee.JobTitle;
+                employee.Salary = updatedEmployee.Salary;
+
+                // Redirect to the employee list or employee details page
+                return RedirectToAction("EmployeeList"); // Or Redirect to "Browse" for the updated employee
+            }
+
+            return View(updatedEmployee); // Return view with validation errors
         }
     }

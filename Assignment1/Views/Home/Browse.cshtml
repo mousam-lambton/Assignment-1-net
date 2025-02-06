@@ -22,7 +22,16 @@
     </dl>
 </div>
 
-<div>
+<div class="d-flex  my-3">
     <a asp-action="Browse" asp-route-id="@(ViewBag.CurrentIndex - 1)" class="btn btn-secondary @(ViewBag.CurrentIndex == 0 ? "disabled" : "")">Previous</a>
+
+    @for (int i=0; i<=ViewBag.TotalEmployees; i++)
+    {
+        <a asp-action="Browse" asp-route-id="@i" class="btn @(ViewBag.CurrentIndex == i ? "disabled" : "")">
+            @(i+1)
+        </a>
+        
+    }
+
     <a asp-action="Browse" asp-route-id="@(ViewBag.CurrentIndex + 1)" class="btn btn-secondary @(ViewBag.CurrentIndex == ViewBag.TotalEmployees ? "disabled" : "")">Next</a>
 </div>

@@ -5,7 +5,31 @@
 <div class="d-flex flex-column justify-content-center align-items-center" style="height: 80vh; text-align: center;">
     <h1 class="h3 mb-3">This is Assignment 1 of Web Applications using C# .NET</h1>
     <p>This project demonstrates the creation of a web application using ASP.NET Core and Bootstrap.</p>
-    <p>Click on Employee on the Navbar in action <a asp-action="EmployeeList">Here</a>.</p>
+    <div class="row">
+        <a class="col-md-4 mb-4" asp-area="" asp-controller="Home" asp-action="EmployeeList">
+            <div class="card p-5 text-center">
+                <img src="https://img.icons8.com/?size=100&id=102261&format=png&color=000000" alt="icon" width="100" class="mx-auto d-block"/>
+                <h5 class="card-title">Employees</h5>
+                <p class="card-text">View and manage employees.</p>
+            </div>
+        </a>
+        <a class="col-md-4 mb-4" asp-area="" asp-controller="Home" asp-action="AddEmployee">
+            <div class="card p-5 text-center">
+                <img src="https://img.icons8.com/?size=100&id=8953&format=png&color=000000" alt="icon" width="100" class="mx-auto d-block"/>
+                <h5 class="card-title">Add New Employee</h5>
+                <p class="card-text">Add a new employee to the system.</p>
+            </div>
+        </a>
+        <a class="col-md-4 mb-4" asp-area="" asp-controller="Home" asp-action="Browse">
+            <div class="card p-5 text-center">
+                <img src="https://img.icons8.com/?size=100&id=132&format=png&color=000000" alt="icon" width="100" class="mx-auto d-block"/>
+                <h5 class="card-title">Employee Details</h5>
+                <p class="card-text">View each employee data.</p>
+            </div>
+        </a>
+    </div>
+
+
     <footer class="mt-5">
         <p>Project by:</p>
         <ul class="list-unstyled">

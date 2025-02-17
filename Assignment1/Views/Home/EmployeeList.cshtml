@@ -6,41 +6,88 @@
 
 <h1>Employee List</h1>
 <div class="my-4">
-<a asp-action="AddEmployee" class="btn btn-outline-secondary"> ➕ Add New Employee</a>
-<a asp-action="Browse" class="btn btn-outline-secondary"> 🔍 Browse Employees</a>
+    <a asp-action="AddEmployee" class="btn btn-outline-secondary"> ➕ Add New Employee</a>
+    <a asp-action="Browse" class="btn btn-outline-secondary"> 🔍 Browse Employees</a>
 </div>
 
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th>Employee ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Job Title</th>
-        <th>Salary</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var employee in Model)
-    {
-        <tr>
-            <td>@employee.EmployeeID</td>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-            <td>@employee.Salary.ToString("C")</td>
-            <td>
-                
-                <a asp-action="Browse" asp-route-id="@(employee.EmployeeID-1)" class="text-decoration-underline">
-                    👁️ View
-                </a>
-                &nbsp; &nbsp;
-                <a asp-action="EditEmployee" asp-route-id="@(employee.EmployeeID)" class="text-decoration-underline">
-                    📝 Edit
-                </a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Job Title</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.EmployeeID</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.JobTitle</td>
+                    <td>@employee.Salary.ToString("C")</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Browse" asp-route-id="@employee.EmployeeID" 
+                               class="btn btn-sm btn-outline-primary">
+                                👁️ View
+                            </a>
+                            <a asp-action="EditEmployee" asp-route-id="@employee.EmployeeID" 
+                               class="btn btn-sm btn-outline-secondary">
+                                📝 Edit
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteModal-@employee.EmployeeID">
+                                🗑️ Delete
+                            </button>
+                        </div>
+
+                        <!-- Delete Modal for each employee -->
+                        <div class="modal fade" id="deleteModal-@employee.EmployeeID" tabindex="-1" 
+                             aria-labelledby="deleteModalLabel-@employee.EmployeeID" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel-@employee.EmployeeID">
+                                            Confirm Delete
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" 
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete @employee.FirstName @employee.LastName?
+                                        <br />
+                                        <small class="text-muted">
+                                            This action cannot be undone.
+                                        </small>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" 
+                                                data-bs-dismiss="modal">Cancel</button>
+                                        <form asp-action="DeleteEmployee" asp-route-id="@employee.EmployeeID" 
+                                              method="post" style="display: inline;">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info" role="alert">
+        No employees found. <a asp-action="AddEmployee">Add your first employee</a>
+    </div>
+}

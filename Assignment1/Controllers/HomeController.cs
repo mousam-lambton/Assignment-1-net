@@ -81,4 +81,27 @@ public class HomeController : Controller
 
         return View(updatedEmployee);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> DeleteEmployee(int id)
+    {
+        var employee = await _context.Employees.FindAsync(id);
+        if (employee == null)
+        {
+            return NotFound();
+        }
+        return View(employee);
+    }
+
+    [HttpPost, ActionName("DeleteEmployee")]
+    public async Task<IActionResult> DeleteEmployeeConfirmed(int id)
+    {
+        var employee = await _context.Employees.FindAsync(id);
+        if (employee != null)
+        {
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+        }
+        return RedirectToAction(nameof(EmployeeList));
+    }
 }

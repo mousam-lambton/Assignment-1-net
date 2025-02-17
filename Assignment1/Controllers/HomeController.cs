@@ -1,110 +1,84 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+using Assignment1.Data;
 using Assignment1.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
-namespace Assignment1.Controllers;
+public class HomeController : Controller
+{
+    private readonly ApplicationDbContext _context;
 
- public class HomeController : Controller
+    public HomeController(ApplicationDbContext context)
     {
-        // List to store employees
-        private static List<Employee> employees = new List<Employee>
-        {
-            // Default list of static employees for viewing
-            new Employee { EmployeeID = 1, FirstName = "Mousam", LastName = "Dhakal", JobTitle = "Developer", Salary = 53000 },
-            new Employee { EmployeeID = 2, FirstName = "Arbin", LastName = "Shrestha", JobTitle = "Designer", Salary = 62570 },
-            new Employee { EmployeeID = 3, FirstName = "Parmod", LastName = "Shrestha", JobTitle = "QA", Salary = 130900 },
-            new Employee { EmployeeID = 4, FirstName = "KP", LastName = "Oli", JobTitle = "Prime Minister", Salary = 300000 },
-            new Employee { EmployeeID = 5, FirstName = "Albert", LastName = "Danison", JobTitle = "CEO", Salary = 190000 }
-        };
-        
-        // Index page displays our project name, link to the Employee List and contributors
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        // Action to display the list of employees
-        public IActionResult EmployeeList()
-        {
-            return View(employees);
-        }
-
-        // Action to add a new employee
-        [HttpGet]
-        public IActionResult AddEmployee()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AddEmployee(Employee employee)
-        {
-            if (ModelState.IsValid)
-            {
-                // Generate a new Employee ID automatically
-                // Based on the maximum Employee ID in the list and incremented by 1
-                employee.EmployeeID = employees.Count > 0 ? employees.Max(e => e.EmployeeID) + 1 : 1;
-
-                // Add the new employee to the list
-                employees.Add(employee);
-
-                // Redirect to the index page
-                return RedirectToAction("EmployeeList");
-            }
-            return View(employee);
-        }
-       
-
-        // Action to browse employees one by one
-        public IActionResult Browse(int id = 0)
-        {
-            if (id < 0 || id >= employees.Count)
-            {
-                id = 0; // Reset to the first employee if out of bounds
-            }
-
-            var employee = employees[id];
-            ViewBag.CurrentIndex = id;
-            ViewBag.TotalEmployees = employees.Count - 1;
-
-            return View(employee);
-        }
-        
-        // Edit employee GET action
-        [HttpGet]
-        public IActionResult EditEmployee(int id)
-        {
-            var employee = employees.FirstOrDefault(e => e.EmployeeID == id);
-            if (employee == null)
-            {
-                return NotFound(); // Return 404 if employee not found
-            }
-            return View(employee);
-        }
-
-        // Edit employee POST action
-        [HttpPost]
-        public IActionResult EditEmployee(Employee updatedEmployee)
-        {
-            if (ModelState.IsValid)
-            {
-                var employee = employees.FirstOrDefault(e => e.EmployeeID == updatedEmployee.EmployeeID);
-
-                if (employee == null)
-                {
-                    return NotFound(); // Return 404 if employee not found
-                }
-
-                // Update employee data
-                employee.FirstName = updatedEmployee.FirstName;
-                employee.LastName = updatedEmployee.LastName;
-                employee.JobTitle = updatedEmployee.JobTitle;
-                employee.Salary = updatedEmployee.Salary;
-
-                // Redirect to the employee list or employee details page
-                return RedirectToAction("EmployeeList"); // Or Redirect to "Browse" for the updated employee
-            }
-
-            return View(updatedEmployee); // Return view with validation errors
-        }
+        _context = context;
     }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult EmployeeList()
+    {
+        var employees = _context.Employees.ToList();
+        return View(employees);
+    }
+
+    [HttpGet]
+    public IActionResult AddEmployee()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddEmployee(Employee employee)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Employees.Add(employee);
+            _context.SaveChanges();
+            return RedirectToAction("EmployeeList");
+        }
+
+        return View(employee);
+    }
+
+    public IActionResult Browse(int id = 0)
+    {
+        var employee = _context.Employees.Skip(id).FirstOrDefault();
+        if (employee == null)
+        {
+            return NotFound();
+        }
+
+        ViewBag.CurrentIndex = id;
+        ViewBag.TotalEmployees = _context.Employees.Count() - 1;
+
+        return View(employee);
+    }
+
+    [HttpGet]
+    public IActionResult EditEmployee(int id)
+    {
+        var employee = _context.Employees.Find(id);
+        if (employee == null)
+        {
+            return NotFound();
+        }
+
+        return View(employee);
+    }
+
+
+    [HttpPost]
+    public IActionResult EditEmployee(Employee updatedEmployee)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Employees.Update(updatedEmployee);
+            _context.SaveChanges();
+            return RedirectToAction("EmployeeList");
+        }
+
+        return View(updatedEmployee);
+    }
+}

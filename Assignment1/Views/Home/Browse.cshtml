@@ -33,17 +33,29 @@
 </div>
 
 <div class="d-flex gap-2 my-3">
-    <a asp-action="Browse" asp-route-id="@(ViewBag.CurrentId - 1)"
-       class="btn btn-secondary @(ViewBag.CurrentId <= ViewBag.MinId ? "disabled" : "")">
-        Previous
-    </a>
+    @if (ViewBag.PrevId != null)
+    {
+        <a asp-action="Browse" asp-route-id="@ViewBag.PrevId" class="btn btn-secondary">
+            Previous
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-secondary disabled">Previous</a>
+    }
 
     <a asp-action="EmployeeList" class="btn btn-info">View All</a>
 
-    <a asp-action="Browse" asp-route-id="@(ViewBag.CurrentId + 1)"
-       class="btn btn-secondary @(ViewBag.CurrentId >= ViewBag.MaxId ? "disabled" : "")">
-        Next
-    </a>
+    @if (ViewBag.NextId != null)
+    {
+        <a asp-action="Browse" asp-route-id="@ViewBag.NextId" class="btn btn-secondary">
+            Next
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-secondary disabled">Next</a>
+    }
 </div>
 
 <!-- Delete Confirmation Modal -->

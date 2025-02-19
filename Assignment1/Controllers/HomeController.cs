@@ -44,18 +44,60 @@ public class HomeController : Controller
 
     public IActionResult Browse(int id = 0)
     {
-        var employee = _context.Employees.Skip(id).FirstOrDefault();
+        // Get all employees ordered by ID
+        var allEmployees = _context.Employees.OrderBy(e => e.EmployeeID).ToList();
+
+        if (!allEmployees.Any())
+        {
+            // Handle case when there are no employees
+            return RedirectToAction("EmployeeList");
+        }
+
+        // If id is 0 (default), use the first employee
+        Employee? employee;
+        int currentIndex;
+
+        if (id == 0)
+        {
+            // Use first employee when no specific ID is provided
+            employee = allEmployees.FirstOrDefault();
+            currentIndex = 0;
+        }
+        else
+        {
+            // Find the employee with the specified ID
+            employee = allEmployees.FirstOrDefault(e => e.EmployeeID == id);
+
+            // If not found, use the first employee
+            if (employee == null)
+            {
+                employee = allEmployees.FirstOrDefault();
+                currentIndex = 0;
+            }
+            else
+            {
+                // Find the index of the employee in our ordered list
+                currentIndex = allEmployees.IndexOf(employee);
+            }
+        }
+
+        // If we still don't have an employee (empty DB), return not found
         if (employee == null)
         {
             return NotFound();
         }
 
-        ViewBag.CurrentIndex = id;
-        ViewBag.TotalEmployees = _context.Employees.Count() - 1;
+        // Get previous and next employee IDs
+        int? prevId = currentIndex > 0 ? allEmployees[currentIndex - 1].EmployeeID : null;
+        int? nextId = currentIndex < allEmployees.Count - 1 ? allEmployees[currentIndex + 1].EmployeeID : null;
+
+        // Set ViewBag properties
+        ViewBag.CurrentId = employee.EmployeeID;
+        ViewBag.PrevId = prevId;
+        ViewBag.NextId = nextId;
 
         return View(employee);
     }
-
     [HttpGet]
     public IActionResult EditEmployee(int id)
     {
